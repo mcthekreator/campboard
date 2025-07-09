@@ -1,0 +1,35 @@
+.ui-button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.2rem;
+  width: 100%;
+  height: 50px;
+
+  &.primary {
+    background-color: #4F46E5;
+    color: white;
+  }
+
+  &.accent {
+    background-color: #ff4081;
+    color: white;
+  }
+
+  &.warn {
+    background-color: #f44336;
+    color: white;
+  }
+
+  &.default {
+    background-color: #eee;
+    color: #333;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

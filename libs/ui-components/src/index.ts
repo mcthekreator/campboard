@@ -1,1 +1,3 @@
-export * from './lib/ui-components';
+export * from './../src';
+
+export * from './button-component/button-component';
