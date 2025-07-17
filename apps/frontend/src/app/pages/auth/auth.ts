@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent, InputComponent } from '@campboard/ui-components';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
-  imports: [CommonModule, ButtonComponent, InputComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterOutlet,
+  ],
   templateUrl: './auth.html',
   styleUrl: './auth.scss',
 })
-export class Auth {}
+export class AuthComponent {}
