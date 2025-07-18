@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Auth } from './pages/auth/auth';
+import { AuthComponent } from './pages/auth/auth';
 
 @Component({
-  imports: [ RouterModule, Auth],
+  imports: [ RouterModule, AuthComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
