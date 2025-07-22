@@ -15,30 +15,24 @@ const LoginComponent: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    const response = await login(email, password);
-    console.log('Login response:', response);
-    toast.success('Login successful!');
-  } catch (error: any) {
-    console.log('Caught error:', error);
-
-    const errorMessage =
-      error?.response?.data?.message ||
-      error?.message ||
-      'Login failed. Please try again.';
-
-    console.error('Login error:', errorMessage);
-    toast.error(errorMessage);
-  } finally {
-    setLoading(false);
-  }
-};
-
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      const response = await login(email, password);
+      toast.success('Login successful!');
+    } catch (error: any) {
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        'Login failed. Please try again.';
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="">
