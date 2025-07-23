@@ -4,13 +4,10 @@ import { useAuth } from '../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '../../store/auth.store';
-import { AuthResponse } from '../../types/auth..types';
-import { resolve } from 'path';
 
 const LoginComponent: React.FC = () => {
   const { login } = useAuth();
 
-  const loading = useAuthStore((state) => state.loading);
   const setLoading = useAuthStore((state) => state.setLoading);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -77,3 +74,4 @@ const LoginComponent: React.FC = () => {
 };
 
 export default LoginComponent;
+

@@ -38,11 +38,10 @@ export const forgotPasswordApi = async (
 };
 
 export const resetPasswordApi = async (
-  email: string,
-  otp: string,
+  token: string,
   newPassword: string
 ): Promise<AuthResponse> => {
-  const { data } = await API.post('/auth/reset-password', { email, otp, newPassword });
+  const { data } = await API.post('/auth/reset-password', { token, newPassword });
   return data;
 };
 
