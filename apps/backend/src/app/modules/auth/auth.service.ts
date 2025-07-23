@@ -1,9 +1,9 @@
-import { 
-  Injectable, 
-  UnauthorizedException, 
-  BadRequestException, 
+import {
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
   ConflictException,
-  NotFoundException 
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -20,29 +20,32 @@ export class AuthService {
   private readonly OTP_EXPIRY_MINUTES = 10;
 
   constructor(
-    @InjectRepository(UserEntity) 
+    @InjectRepository(UserEntity)
     private readonly usersRepo: Repository<UserEntity>,
     private readonly jwtService: JwtService,
     private readonly mailerService: MailerService,
-    private readonly configService: ConfigService,
+    private readonly configService: ConfigService
   ) {}
 
   async register(registerDto: RegisterDto) {
     const normalizedEmail = registerDto.email.trim().toLowerCase();
-    const existingUser = await this.usersRepo.findOne({ 
-      where: { email: normalizedEmail } 
+    const existingUser = await this.usersRepo.findOne({
+      where: { email: normalizedEmail },
     });
-    
+
     if (existingUser) {
       throw new ConflictException('Email already registered');
     }
 
-    const hashedPassword = await bcrypt.hash(registerDto.password, this.SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(
+      registerDto.password,
+      this.SALT_ROUNDS
+    );
     const otp = this.generateOtp();
     const otpExpiry = this.getOtpExpiry();
 
     const user = this.usersRepo.create({
-      name: registerDto.firstName + " "+ registerDto.lastName,
+      name: registerDto.firstName + ' ' + registerDto.lastName,
       email: normalizedEmail,
       password: hashedPassword,
       otp,
@@ -52,15 +55,15 @@ export class AuthService {
     await this.usersRepo.save(user);
     await this.mailerService.sendOtpEmail(normalizedEmail, otp);
 
-    return { 
+    return {
       message: 'Registration successful. OTP sent to email.',
-      email: normalizedEmail 
+      email: normalizedEmail,
     };
   }
 
   async verifyOtp(email: string, otp: string) {
     const user = await this.usersRepo.findOne({ where: { email } });
-    
+
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -83,7 +86,7 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user = await this.usersRepo.findOne({ where: { email } });
-    
+
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -100,59 +103,60 @@ export class AuthService {
     const payload = { email: user.email, sub: user.id, role: user.role };
     const accessToken = this.jwtService.sign(payload);
 
-    return { 
+    return {
       accessToken,
       user: {
         id: user.id,
         email: user.email,
         name: user.name,
-        role: user.role
-      }
+        role: user.role,
+      },
     };
   }
 
-  async forgotPassword(email: string) {
-    const user = await this.usersRepo.findOne({ where: { email } });
-    
-    if (!user) {
-      return { message: 'If the email exists, OTP has been sent for password reset.' };
-    }
+async forgotPassword(email: string) {
+  const user = await this.usersRepo.findOne({ where: { email } });
 
-    const otp = this.generateOtp();
-    const otpExpiry = this.getOtpExpiry();
-    
-    user.otp = otp;
-    user.otpExpiry = otpExpiry;
-    await this.usersRepo.save(user);
-
-    await this.mailerService.sendPasswordResetEmail(email, otp);
-
-    return { message: 'If the email exists, OTP has been sent for password reset.' };
+  if (!user) {
+    return { message: 'If the email exists, a reset link has been sent.' };
   }
 
-  async resetPassword(email: string, otp: string, newPassword: string) {
-    const user = await this.usersRepo.findOne({ where: { email } });
-    
-    if (!user) {
-      throw new UnauthorizedException('Invalid OTP');
+  const payload = { email: user.email };
+  const token = this.jwtService.sign(payload, {
+    secret: this.configService.get('JWT_SECRET'),
+    expiresIn: '15m',
+  });
+
+  const resetUrl = `http://localhost:4200/reset-password?token=${token}`;
+  await this.mailerService.sendResetLinkEmail(user.email, resetUrl);
+
+  return { message: 'If the email exists, a reset link has been sent.' };
+}
+
+
+  async resetPasswordFromToken(token: string, newPassword: string) {
+    try {
+      const decoded = this.jwtService.verify(token, {
+        secret: this.configService.get('JWT_SECRET'),
+      });
+
+      const user = await this.usersRepo.findOne({
+        where: { email: decoded.email },
+      });
+
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, this.SALT_ROUNDS);
+      user.password = hashedPassword;
+
+      await this.usersRepo.save(user);
+
+      return { message: 'Password reset successfully' };
+    } catch (err) {
+      throw new UnauthorizedException('Invalid or expired reset token');
     }
-
-    if (!user.otp || user.otp !== otp) {
-      throw new UnauthorizedException('Invalid OTP');
-    }
-
-    if (user.otpExpiry && new Date() > user.otpExpiry) {
-      throw new UnauthorizedException('OTP has expired');
-    }
-
-    const hashedPassword = await bcrypt.hash(newPassword, this.SALT_ROUNDS);
-    
-    user.password = hashedPassword;
-    user.otp = null;
-    user.otpExpiry = null;
-    await this.usersRepo.save(user);
-
-    return { message: 'Password reset successfully' };
   }
 
   private generateOtp(): string {
