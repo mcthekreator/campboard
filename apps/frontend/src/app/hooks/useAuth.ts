@@ -26,11 +26,10 @@ export const useAuth = () => {
     return data;
   };
   const handleResetPAssword = async (
-    email: string,
-    otp: string,
+    token: string,
     newPassword: string
   ) => {
-    const data = await resetPasswordApi(email, otp, newPassword);
+    const data = await resetPasswordApi(token, newPassword);
     login(data);
     return data;
   };
