@@ -9,6 +9,7 @@ type AuthState = {
   login: (data: AuthResponse) => void;
   logout: () => void;
   forgotPassword: ()=> void;
+  resetPassword: ()=> void;
   verifyAccount: ()=> void;
   setLoading: (value: boolean) => void;
 };
@@ -27,6 +28,7 @@ export const useAuthStore = create<AuthState>()(
 
       logout: () => set({ user: null, token: null }),
       forgotPassword: () => set({ user: null, token: null }),
+      resetPassword: () => set({ user: null, token: null }),
       verifyAccount: () => set({ user: null, token: null }),
       setLoading: (value) => set({ loading: value }),
     }),
