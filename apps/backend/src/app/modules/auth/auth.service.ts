@@ -126,8 +126,8 @@ async forgotPassword(email: string) {
     secret: this.configService.get('JWT_SECRET'),
     expiresIn: '15m',
   });
-
-  const resetUrl = `http://localhost:4200/reset-password?token=${token}`;
+  const localUrl = this.configService.get('LOCAL_URL')
+  const resetUrl = `${localUrl}/reset-password?token=${token}`;
   await this.mailerService.sendResetLinkEmail(user.email, resetUrl);
 
   return { message: 'If the email exists, a reset link has been sent.' };
