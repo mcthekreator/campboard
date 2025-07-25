@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import InputComponent from '../ui/input-.component';
 import { useAuth } from '../../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '../../store/auth.store';
 
 const LoginComponent: React.FC = () => {
   const { login } = useAuth();
-
   const setLoading = useAuthStore((state) => state.setLoading);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the intended destination from location state
+  const from = location.state?.from?.pathname || '/dashboard';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,8 +22,19 @@ const LoginComponent: React.FC = () => {
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 3000));
-      const response = await login(email, password);
+      const loginResponse = await login(email, password);
+      console.log(loginResponse);
+
       toast.success('Login successful!');
+
+      // Check user role from the login response, not from store
+      if (loginResponse?.user?.role === 'STUDENT') {
+        console.log(loginResponse?.user?.role);
+        navigate(from, { replace: true });
+      } else {
+        navigate('/unauthorized', { replace: true });
+      }
+
     } catch (error: any) {
       const errorMessage =
         error?.response?.data?.message ||
@@ -74,4 +89,3 @@ const LoginComponent: React.FC = () => {
 };
 
 export default LoginComponent;
-
