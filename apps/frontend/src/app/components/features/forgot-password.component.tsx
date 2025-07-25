@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import InputComponent from '../ui/input-.component';
 import { useAuth } from '../../hooks/useAuth';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '../../store/auth.store';
 
@@ -16,8 +15,8 @@ const ForgotPasswordComponent: React.FC = () => {
     setLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 3000));
-      const response = await forgotPassword(email);
-      toast.success('Login successful!');
+      await forgotPassword(email);
+      toast.success('Login successful!:');
     } catch (error: any) {
       const errorMessage =
         error?.response?.data?.message ||
