@@ -6,7 +6,7 @@ export const dbConfig: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'h3lloW0r1d',
+  password: 'password101',
   database: 'campboard',
   entities: [UserEntity],
   synchronize: true,
