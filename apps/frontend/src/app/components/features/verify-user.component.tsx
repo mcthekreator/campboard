@@ -47,7 +47,7 @@ const VerifyUserComponent: React.FC = () => {
     setLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      const response = await verifyAccount(email, otp);
+      await verifyAccount(email, otp);
       toast.success('Verification successful! You can now log in.');
       navigate('/');
     } catch (error: any) {
