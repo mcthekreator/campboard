@@ -1,5 +1,5 @@
 import React from 'react';
-import ResetPasswordLayout from '../../layout/resetPassword-layout.component';
+import ResetPasswordLayout from '../../layout/auth/resetPassword-layout.component';
 
 const ResetPasswordPage: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import VerifyUserLayout from '../../layout/verify-user.layout';
+import VerifyUserLayout from '../../layout/auth/verify-user.layout';
 
 const VerifyUserPage: React.FC = () => {
   return (
