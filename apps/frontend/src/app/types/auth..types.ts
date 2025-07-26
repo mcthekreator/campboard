@@ -3,7 +3,8 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  name: string
+  name: string;
+  role: string;
 }
 
 export interface AuthResponse {
