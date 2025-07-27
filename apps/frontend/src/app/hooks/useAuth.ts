@@ -12,20 +12,23 @@ export const useAuth = () => {
 
   const handleLogin = async (email: string, password: string) => {
     const data = await loginApi(email, password);
-    login(data);
-    return data;
+    login(data); // This updates the store
+    return data; // Return the data so we can use it immediately
   };
+
   const handleForgotPassword = async (email: string) => {
     const data = await forgotPasswordApi(email);
     login(data);
     return data;
   };
+
   const handleVerifyAccount = async (email: string, otp: string) => {
     const data = await verifyOtpApi(email, otp);
     login(data);
     return data;
   };
-  const handleResetPAssword = async (
+
+  const handleResetPassword = async (
     token: string,
     newPassword: string
   ) => {
@@ -33,6 +36,7 @@ export const useAuth = () => {
     login(data);
     return data;
   };
+
   const handleRegister = async (
     firstName: string,
     lastName: string,
@@ -41,6 +45,7 @@ export const useAuth = () => {
   ) => {
     const data = await registerApi(firstName, lastName, email, password);
     login(data);
+    return data; // Return data here too for consistency
   };
 
   return {
@@ -49,7 +54,7 @@ export const useAuth = () => {
     login: handleLogin,
     register: handleRegister,
     logout,
-    resetPassword: handleResetPAssword,
+    resetPassword: handleResetPassword,
     forgotPassword: handleForgotPassword,
     verifyAccount: handleVerifyAccount
   };
