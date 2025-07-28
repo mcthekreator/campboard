@@ -22,7 +22,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   imageUrl,
 }) => {
   return (
-    <div className="flex flex-col-reverse md:flex my-14 md:flex-row justify-between items-center gap-4 border-b border-gray-300 pb-6">
+    <div className="flex md:flex my-5 md:my-14 md:flex-row justify-between items-center gap-4 border-b border-gray-300 pb-6">
       {/* Left content */}
       <div className="flex-1">
         {/* Author Info */}
@@ -38,12 +38,14 @@ const PostComponent: React.FC<PostComponentProps> = ({
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl font-extrabold text-text-primary mt-2 leading-snug">
+        <h2 className="text-base md:text-xl font-extrabold text-text-primary mt-2 leading-snug line-clamp-2 md:line-clamp-none">
           {title}
         </h2>
 
         {/* Excerpt */}
-        <p className="text-gray-600 mt-2 sm:text-sm md:text-base">{excerpt}</p>
+        <p className="text-gray-600 mt-2 text-xs sm:text-sm md:text-base line-clamp-2 md:line-clamp-none">
+          {excerpt}
+        </p>
 
         {/* Metadata */}
         <div className="flex items-center text-text-tertiary text-sm mt-4 gap-4 flex-wrap">
@@ -63,7 +65,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
       </div>
 
       {/* Right image */}
-      <div className="w-full md:w-52 flex-shrink-0">
+      <div className="w-24 md:w-52 flex-shrink-0">
         <img
           src={imageUrl}
           alt="Post thumbnail"
