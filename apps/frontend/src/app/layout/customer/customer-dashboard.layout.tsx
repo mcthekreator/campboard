@@ -15,7 +15,7 @@ const CustomerDashboardLayoutComponent: React.FC = () => {
       </nav>
 
       {/* Main content */}
-      <article className="w-[90%] md:w-[65%] md:px-20 mx-auto border-r border-gray-200  overflow-y-auto md:py-4">
+      <article className="w-[90%] md:w-[65%] md:px-20 mx-auto md:border-r border-gray-200  overflow-y-auto md:py-4">
         <SearchComponent />
         <FilterComponent />
         <FeedComponent />

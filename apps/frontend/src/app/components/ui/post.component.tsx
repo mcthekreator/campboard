@@ -22,7 +22,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   imageUrl,
 }) => {
   return (
-    <div className="flex-row md:flex my-14 md:flex-col justify-between items-center gap-4 border-b border-gray-300 pb-6">
+    <div className="flex flex-col-reverse md:flex my-14 md:flex-row justify-between items-center gap-4 border-b border-gray-300 pb-6">
       {/* Left content */}
       <div className="flex-1">
         {/* Author Info */}
