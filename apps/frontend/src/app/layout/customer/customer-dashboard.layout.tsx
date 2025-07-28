@@ -10,9 +10,9 @@ const CustomerDashboardLayoutComponent: React.FC = () => {
   return (
     <div className="flex h-screen">
       {/* Navbar */}
-      <nav className="w-[5%] hidden md:block">
+      <div className="w-[5%] hidden md:block">
         {/*<NavbarComponent/>*/}
-      </nav>
+      </div>
 
       {/* Main content */}
       <article className="w-[90%] md:w-[65%] md:px-20 mx-auto md:border-r border-gray-200  overflow-y-auto md:py-4">
