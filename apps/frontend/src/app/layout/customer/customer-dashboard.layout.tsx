@@ -4,14 +4,14 @@ import FilterComponent from '../../components/features/filters.component';
 import SearchComponent from '../../components/features/search.component';
 import ForYouComponent from '../../components/features/for-you.component';
 import EventsComponents from '../../components/features/events.components';
-import NavbarComponent from '../../components/ui/navbar.component';
+// import NavbarComponent from '../../components/ui/navbar.component';
 
 const CustomerDashboardLayoutComponent: React.FC = () => {
   return (
     <div className="flex h-screen">
       {/* Navbar */}
       <nav className="w-[5%] hidden md:block">
-        <NavbarComponent/>
+        {/*<NavbarComponent/>*/}
       </nav>
 
       {/* Main content */}
