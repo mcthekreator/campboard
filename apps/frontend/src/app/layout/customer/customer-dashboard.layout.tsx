@@ -3,7 +3,7 @@ import FeedComponent from '../../components/features/feed.component';
 import ForYouComponent from '../../components/features/for-you.component';
 import EventsComponents from '../../components/features/events.components';
 import NavbarComponent from '../../components/ui/navbar.component';
-import PostHeaderComponent from '../../components/ui/post-header.component';
+import PostHeaderComponent from '../../components/features/post-header.component';
 
 const CustomerDashboardLayoutComponent: React.FC = () => {
   return (
