@@ -1,3 +1,4 @@
+import React from 'react';
 import LeftAuthComponent from '../../components/features/left-auth.component';
 import LoginComponent from '../../components/features/login.component';
 import AuthHeader from '../../components/ui/auth-header.component';
