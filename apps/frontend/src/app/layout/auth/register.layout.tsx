@@ -1,6 +1,7 @@
 import LeftAuthComponent from '../../components/features/left-auth.component';
 import RegisterComponent from '../../components/features/register.component';
 import AuthHeader from '../../components/ui/auth-header.component';
+import React from 'react';
 
 const RegisterLayout: React.FC = () => {
   return (
