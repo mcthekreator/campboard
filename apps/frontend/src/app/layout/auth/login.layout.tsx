@@ -17,7 +17,6 @@ const LoginLayout: React.FC = () => {
     </div>
   </div>
 </div>
-
   );
 };
 
