@@ -4,6 +4,10 @@ import { AuthResponse } from '../types/auth..types';
 const API = axios.create({
   baseURL: 'https://ab63376c1341.ngrok-free.app/api',
   withCredentials: true,
+  headers: {
+    'ngrok-skip-browser-warning': 'true', // This is important for ngrok
+    'Content-Type': 'application/json',
+  },
 });
 
 export const loginApi = async (
