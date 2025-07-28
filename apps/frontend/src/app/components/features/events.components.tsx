@@ -1,4 +1,4 @@
-
+import React from 'react';
 import EventPostComponent from '../ui/event-post.component';
 
 const EventsComponent: React.FC = () => {

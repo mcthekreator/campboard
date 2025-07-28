@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LeftAuthComponent from '../../components/features/left-auth.component';
 import AuthHeader from '../../components/ui/auth-header.component';
 import ForgotPasswordComponent from '../../components/features/forgot-password.component';

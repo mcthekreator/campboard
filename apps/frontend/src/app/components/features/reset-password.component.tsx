@@ -15,7 +15,7 @@ const ResetPasswordComponent: React.FC = () => {
 
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const ResetPasswordComponent: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await resetPassword(token, newPassword);
+       await resetPassword(token, newPassword);
       toast.success('Password reset successful. You can now log in.');
        navigate('/');
       // Optional: redirect to login

@@ -1,4 +1,4 @@
-
+import React from 'react';
 import PostForYouComponent from '../ui/post-for-you.component';
 
 const ForYouComponent: React.FC = () => {

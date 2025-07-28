@@ -1,5 +1,5 @@
 import PostComponent from '../ui/post.component';
-
+import React from 'react';
 const FeedComponent: React.FC = () => {
   // Create a mock array of 7 items
   const posts = Array.from({ length: 7 });
