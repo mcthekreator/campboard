@@ -11,10 +11,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:4200',
+    origin:  ['https://campboard.vercel.app', 'http://localhost:4200'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'ngrok-skip-browser-warning'],
   });
     app.useGlobalPipes(new ValidationPipe({
     whitelist: true,

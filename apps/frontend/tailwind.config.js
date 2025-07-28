@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "purple-primary": "#4F46E5",
+        "purple-primary": "#083344",
         "purple-secondary": "#D9D6FE",
         "text-primary": "#1A1A1A",
         "text-secondary": "#374151",
