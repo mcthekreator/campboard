@@ -11,4 +11,7 @@ export const dbConfig: TypeOrmModuleOptions = {
   entities: [UserEntity],
   synchronize: true,
   url: process.env.DB_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  }
 };
