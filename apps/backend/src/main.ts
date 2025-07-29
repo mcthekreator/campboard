@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin:  [process.env.FRONTEND_URL || 'http://localhost:4200'],
+    origin:  [process.env.DEPLOYED_FRONTEND_URL, process.env.LOCAL_FRONTEND_URL],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'ngrok-skip-browser-warning'],
