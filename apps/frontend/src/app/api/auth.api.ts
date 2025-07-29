@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AuthResponse } from '../types/auth..types';
 
 const API = axios.create({
-  baseURL: 'https://ab63376c1341.ngrok-free.app/api',
+  baseURL: 'https://campboard.onrender.com/api',
   withCredentials: true,
   headers: {
     'ngrok-skip-browser-warning': 'true', // This is important for ngrok
