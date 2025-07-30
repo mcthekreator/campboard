@@ -69,7 +69,7 @@ const LoginComponent: React.FC = () => {
         </Link>
         <button
           type="submit"
-          className="w-full my-10 py-3 bg-purple-primary text-white rounded-md"
+          className="w-full my-10 py-2 md:py-3 bg-purple-primary text-white rounded-md"
         >
           Login
         </button>
