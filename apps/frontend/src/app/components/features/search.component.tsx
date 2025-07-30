@@ -5,7 +5,7 @@ const SearchComponent: React.FC = () => {
   const [email, setEmail] = useState('');
 
   return (
-    <div className="w-5/6 mx-auto hidden md:block">
+    <div className="w-full mx-auto hidden md:block">
       <form className=" mx-auto ">
         <div className="relative">
           <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-primary w-5 h-5" />

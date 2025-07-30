@@ -16,7 +16,7 @@ const NavbarComponent: React.FC = () => {
   return (
     <div className="fixed flex flex-col justify-between items-center h-screen text-white bg-purple-primary w-full max-w-[80px] px-4 py-10">
       <div className="flex flex-col items-center gap-10">
-        <img src="logo-dark.png" alt="Logo" className="w-8 h-8" />
+        <img src="logo.png" alt="Logo" className="w-8 h-8" />
         <FiEdit className="w-6 h-6 cursor-pointer hover:text-purple-200" />
       </div>
 

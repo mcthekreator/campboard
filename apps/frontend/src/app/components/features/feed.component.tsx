@@ -1,11 +1,10 @@
 import PostComponent from '../ui/post.component';
 import React from 'react';
 const FeedComponent: React.FC = () => {
-  // Create a mock array of 7 items
   const posts = Array.from({ length: 7 });
 
   return (
-    <div className="space-y-6 cursor-pointer md:w-5/6 w-full mx-auto"> {/* Add vertical spacing between posts */}
+    <div className="space-y-6 cursor-pointer w-full mx-auto"> {/* Add vertical spacing between posts */}
       {posts.map((_, index) => (
         <PostComponent
           key={index}
