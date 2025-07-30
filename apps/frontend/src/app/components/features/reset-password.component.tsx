@@ -89,7 +89,6 @@ const ResetPasswordComponent: React.FC = () => {
             )
           }
         />
-
         <button
           type="submit"
           className="w-full my-10 py-3 bg-purple-primary text-white rounded-md"

@@ -2,11 +2,11 @@ import React from 'react';
 import EventPostComponent from '../ui/event-post.component';
 
 const EventsComponent: React.FC = () => {
-  // Create a mock array of 7 items
+
   const posts = Array.from({ length: 7 });
 
   return (
-    <div className="space-y-6 cursor-pointer w-full mx-auto"> {/* Add vertical spacing between posts */}
+    <div className="space-y-6 cursor-pointer w-full mx-auto">
       {posts.map((_, index) => (
         <EventPostComponent
           key={index}
@@ -14,7 +14,7 @@ const EventsComponent: React.FC = () => {
           title="The Death of Agile: Why Tech Giants Are "
           date="Jul 19"
           time="02:40"
-          imageUrl="event.jpeg" // Replace with actual image path or URL
+          imageUrl="event.jpeg"
         />
       ))}
     </div>

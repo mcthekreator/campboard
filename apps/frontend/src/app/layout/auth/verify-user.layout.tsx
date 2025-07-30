@@ -5,14 +5,14 @@ import VerifyUserComponent from '../../components/features/verify-user.component
 
 const VerifyUserLayout: React.FC = () => {
   return (
-    <div className="flex w-full min-h-screen">
+    <div className="flex w-full">
   <div className="w-[50%] hidden md:block">
     <LeftAuthComponent />
   </div>
 
-  <div className="flex w-full md:w-[60%] items-center">
-    <div className="w-10/12 mx-auto md:w-8/12">
-      <AuthHeader title='Verify email account' />
+  <div className="flex w-full md:w-[60%] items-center justify-center px-6 py-20">
+    <div className="w-full md:w-8/12">
+      <AuthHeader  title='Verify email account' description='Please check your indox and enter the verification code'/>
       <VerifyUserComponent />
     </div>
   </div>

@@ -28,7 +28,6 @@ const VerifyUserComponent: React.FC = () => {
       updated[index] = value;
       setOtpDigits(updated);
 
-      // Move to next input
       if (value && index < 5) {
         const nextInput = document.getElementById(`otp-${index + 1}`);
         if (nextInput) nextInput.focus();
@@ -64,9 +63,9 @@ const VerifyUserComponent: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="w-full md:my-10 text-center">
-      <p className="mb-6">Enter the 6-digit code sent to <strong>{email}</strong></p>
+      <p className="mb-6 text-text-secondary font-light">Enter the 6-digit code sent to <strong>{email}</strong></p>
 
-      <div className="flex justify-center gap-2 mb-6">
+      <div className="flex justify-center gap-2 mb-10 md:gap-5 md:mb-14">
         {otpDigits.map((digit, index) => (
           <input
             key={index}
@@ -83,7 +82,7 @@ const VerifyUserComponent: React.FC = () => {
 
       <button
         type="submit"
-        className="w-full py-3 bg-purple-primary text-white rounded-md"
+        className="w-full md:w-3/4 py-3 bg-purple-primary text-white rounded-md"
       >
         Verify Account
       </button>

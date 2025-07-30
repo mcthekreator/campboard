@@ -4,12 +4,14 @@ import { useAuth } from '../../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '../../store/auth.store';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const LoginComponent: React.FC = () => {
   const { login } = useAuth();
   const setLoading = useAuthStore((state) => state.setLoading);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,7 +34,6 @@ const LoginComponent: React.FC = () => {
       } else {
         navigate('/unauthorized', { replace: true });
       }
-
     } catch (error: any) {
       const errorMessage =
         error?.response?.data?.message ||
@@ -57,14 +58,20 @@ const LoginComponent: React.FC = () => {
         />
         <InputComponent
           label="Password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           placeholder="********"
+          rightIcon={
+            showPassword ? (
+              <FiEyeOff onClick={() => setShowPassword(false)} />
+            ) : (
+              <FiEye onClick={() => setShowPassword(true)} />
+            )
+          }
         />
         <Link className="text-purple-primary text-sm md:text-lg" to="/forgot-password">
-          {' '}
           Forgot Password?
         </Link>
         <button
