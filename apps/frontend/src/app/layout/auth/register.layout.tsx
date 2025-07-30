@@ -2,26 +2,21 @@ import LeftAuthComponent from '../../components/features/left-auth.component';
 import RegisterComponent from '../../components/features/register.component';
 import AuthHeader from '../../components/ui/auth-header.component';
 import React from 'react';
-
 const RegisterLayout: React.FC = () => {
   return (
-    <div className="flex flex-col md:flex-row w-full min-h-screen">
-      {/* Left image or content - hidden on small devices */}
-      <div className="hidden md:block md:w-1/2">
-        <LeftAuthComponent />
-      </div>
+    <div className="flex w-full min-h-screen">
+  <div className="w-[50%] hidden md:block">
+    <LeftAuthComponent />
+  </div>
 
-      {/* Right form section */}
-      <div className="flex items-center justify-center w-full md:w-1/2 px-4 py-10">
-        <div className="w-full max-w-md">
-          <AuthHeader
-            title="Create an Account"
-            description="Please provide your details to get started"
-          />
-          <RegisterComponent />
-        </div>
-      </div>
+  <div className="flex w-full md:w-[60%] items-center">
+    <div className="w-10/12 mx-auto my-10 md:w-8/12 ">
+      <AuthHeader title='Create an Account' description='Please provide your details to get started'/>
+      <RegisterComponent />
     </div>
+  </div>
+</div>
+
   );
 };
 

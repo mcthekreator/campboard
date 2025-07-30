@@ -12,8 +12,7 @@ const RegisterComponent: React.FC = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const setLoading = useAuthStore((state) => state.setLoading);
-  const navigate = useNavigate();
-
+const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -21,13 +20,17 @@ const RegisterComponent: React.FC = () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       const response = await register(firstName, lastName, email, password);
-      toast.success('Registration successful!');
-      navigate('/verify', { state: { email } });
+      console.log('Login response:', response);
+      toast.success('Login successful!');
+       navigate('/verify', { state: { email } });
+
     } catch (error: any) {
       const errorMessage =
         error?.response?.data?.message ||
         error?.message ||
-        'Registration failed. Please try again.';
+        'Login failed. Please try again.';
+
+      console.error('Login error:', errorMessage);
       toast.error(errorMessage[0]);
     } finally {
       setLoading(false);
@@ -35,69 +38,66 @@ const RegisterComponent: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full space-y-4">
-      <div className="flex flex-col md:flex-row gap-4">
+    <div>
+      <form onSubmit={handleSubmit} className=" w-full md:my-5">
+        <div className=" gap-4 md:flex ">
+          <InputComponent
+            label="First Name"
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            placeholder="Enter First Name"
+          />
+          <InputComponent
+            label="Last Name"
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            placeholder="Enter Last Name"
+          />
+        </div>
         <InputComponent
-          label="First Name"
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          label="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
-          placeholder="Enter First Name"
+          placeholder="mail@ttu.edu.gh"
         />
         <InputComponent
-          label="Last Name"
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          label="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
-          placeholder="Enter Last Name"
+          placeholder="Enter Password"
         />
+        <InputComponent
+          label="Confirm Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          placeholder="Confirm Password"
+        />
+        <button
+          type="submit"
+          className="w-full my-5 py-3 bg-purple-primary text-white rounded-md md:my-10"
+        >
+          Create account
+        </button>
+      </form>
+      <div className="text-center text-sm md:text-lg">
+        <h4>
+          Don't have an account?{' '}
+          <span className="text-purple-primary">
+            <Link to="/">login</Link>
+          </span>
+        </h4>
       </div>
-
-      <InputComponent
-        label="Email"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        placeholder="mail@ttu.edu.gh"
-      />
-
-      <InputComponent
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        placeholder="Enter Password"
-      />
-
-      <InputComponent
-        label="Confirm Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        placeholder="Confirm Password"
-      />
-
-      <button
-        type="submit"
-        className="w-full py-3 bg-purple-primary text-white rounded-md hover:bg-purple-700 transition-all"
-      >
-        Create account
-      </button>
-
-      <div className="text-center text-sm md:text-base">
-        <p>
-          Already have an account?{' '}
-          <Link to="/" className="text-purple-primary font-medium hover:underline">
-            Login
-          </Link>
-        </p>
-      </div>
-    </form>
+    </div>
   );
 };
 

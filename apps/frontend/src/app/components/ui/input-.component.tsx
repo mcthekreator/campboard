@@ -37,7 +37,7 @@ const InputComponent: React.FC<InputProps> = ({
         onChange={onChange}
         required={required}
         disabled={disabled}
-        className="md:py-3 md:px-2 md:h-12 input-field text-sm  py-2 px-2 border border-white-secondary h-10 w-full bg-transparent rounded-md focus:border-2 focus:border-purple-primary focus:outline-none transition-colors duration-300 ease-in-out"
+        className="text-base md:text-sm py-2 px-2 md:py-3 md:px-2 border border-white-secondary h-10 md:h-12 w-full bg-transparent rounded-md focus:border-2 focus:border-purple-primary focus:outline-none transition-colors duration-300 ease-in-out"
       />
     </div>
   );
