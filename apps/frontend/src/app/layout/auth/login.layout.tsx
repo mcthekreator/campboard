@@ -12,8 +12,8 @@ const LoginLayout: React.FC = () => {
       </div>
 
       {/* Right Side */}
-      <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-10 min-h-screen">
-        <div className="w-full max-w-md">
+      <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-20">
+        <div className="w-full md:w-8/12  ">
           <AuthHeader title="Login into your account" />
           <LoginComponent />
         </div>
