@@ -13,7 +13,6 @@ const LoginComponent: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get the intended destination from location state
   const from = location.state?.from?.pathname || '/dashboard';
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,7 +26,6 @@ const LoginComponent: React.FC = () => {
 
       toast.success('Login successful!');
 
-      // Check user role from the login response, not from store
       if (loginResponse?.user?.role === 'STUDENT') {
         console.log(loginResponse?.user?.role);
         navigate(from, { replace: true });
@@ -76,7 +74,7 @@ const LoginComponent: React.FC = () => {
           Login
         </button>
       </form>
-      <div className="text-center text-sm md:text-base">
+      <div className="text-center text-sm md:text-lg">
         <h4>
           Don't have an account?{' '}
           <span className="text-purple-primary">

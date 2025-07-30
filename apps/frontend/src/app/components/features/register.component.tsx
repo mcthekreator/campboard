@@ -23,7 +23,7 @@ const navigate = useNavigate();
       console.log('Login response:', response);
       toast.success('Login successful!');
        navigate('/verify', { state: { email } });
-      
+
     } catch (error: any) {
       const errorMessage =
         error?.response?.data?.message ||
@@ -72,7 +72,15 @@ const navigate = useNavigate();
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          placeholder="********"
+          placeholder="Enter Password"
+        />
+        <InputComponent
+          label="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          placeholder="Confirm Password"
         />
         <button
           type="submit"
@@ -81,7 +89,7 @@ const navigate = useNavigate();
           Create account
         </button>
       </form>
-      <div className="text-center text-sm md:text-based">
+      <div className="text-center text-sm md:text-lg">
         <h4>
           Don't have an account?{' '}
           <span className="text-purple-primary">
