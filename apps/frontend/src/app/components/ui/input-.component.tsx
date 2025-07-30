@@ -22,9 +22,9 @@ const InputComponent: React.FC<InputProps> = ({
   disabled = false,
 }) => {
   return (
-    <div className="input-wrapper flex flex-col gap-2 mb-5 w-full md:mb-1">
+    <div className="input-wrapper flex flex-col gap-2 mb-2 w-full md:mb-5">
       {label && (
-        <label className="mt-2 font-normal hidden md:block " htmlFor={name}>
+        <label className="mt-1 font-normal" htmlFor={name}>
           {label}
         </label>
       )}
