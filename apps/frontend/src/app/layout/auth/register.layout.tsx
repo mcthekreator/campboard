@@ -4,7 +4,7 @@ import AuthHeader from '../../components/ui/auth-header.component';
 import React from 'react';
 const RegisterLayout: React.FC = () => {
   return (
-    <div className="flex w-full min-h-screen">
+    <div className="flex w-full ">
   <div className="w-[50%] hidden md:block">
     <LeftAuthComponent />
   </div>
