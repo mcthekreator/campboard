@@ -21,7 +21,7 @@ const PostForYouComponent: React.FC = () => {
       <div className="flex items-center justify-between">
         <FiMenu
           onClick={toggleMenu}
-          className="w-6 h-6 cursor-pointer md:hidden"
+          className="w-6 h-6 cursor-pointer md:hidden text-gray-600"
         />
         <SearchComponent />
         <div className="block md:hidden">
@@ -33,7 +33,7 @@ const PostForYouComponent: React.FC = () => {
         />
         <FiEdit
           onClick={openWriter}
-          className="w-6 h-6 cursor-pointer md:hidden"
+          className="w-6 h-6 cursor-pointer md:hidden text-gray-600"
         />
       </div>
       <FilterComponent />
