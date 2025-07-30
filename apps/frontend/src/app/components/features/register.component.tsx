@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '../../store/auth.store';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const RegisterComponent: React.FC = () => {
   const { register } = useAuth();
@@ -11,27 +12,50 @@ const RegisterComponent: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const setLoading = useAuthStore((state) => state.setLoading);
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const isValidEmail = (email: string) => /^[a-zA-Z0-9._%+-]+@ttu\.edu\.gh$/.test(email);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      toast.error('All fields are required');
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      toast.error('Email must be a valid TTU email (ending with @ttu.edu.gh)');
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters long');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    setLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 3000));
-      const response = await register(firstName, lastName, email, password);
-      console.log('Login response:', response);
-      toast.success('Login successful!');
-       navigate('/verify', { state: { email } });
-
+       await register(firstName, lastName, email, password);
+      toast.success('Registration successful!');
+      navigate('/verify', { state: { email } });
     } catch (error: any) {
       const errorMessage =
         error?.response?.data?.message ||
         error?.message ||
-        'Login failed. Please try again.';
-
-      console.error('Login error:', errorMessage);
-      toast.error(errorMessage[0]);
+        'Registration failed. Please try again.';
+      toast.error(Array.isArray(errorMessage) ? errorMessage[0] : errorMessage);
     } finally {
       setLoading(false);
     }
@@ -39,8 +63,8 @@ const navigate = useNavigate();
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className=" w-full md:my-5">
-        <div className=" gap-4 md:flex ">
+      <form onSubmit={handleSubmit} className="w-full md:my-5">
+        <div className="gap-4 md:flex">
           <InputComponent
             label="First Name"
             type="text"
@@ -58,6 +82,7 @@ const navigate = useNavigate();
             placeholder="Enter Last Name"
           />
         </div>
+
         <InputComponent
           label="Email"
           type="email"
@@ -66,22 +91,38 @@ const navigate = useNavigate();
           required
           placeholder="mail@ttu.edu.gh"
         />
+
         <InputComponent
           label="Password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          placeholder="Enter Password"
+          placeholder="********"
+          rightIcon={
+            showPassword ? (
+              <FiEyeOff onClick={() => setShowPassword(false)} />
+            ) : (
+              <FiEye onClick={() => setShowPassword(true)} />
+            )
+          }
         />
         <InputComponent
           label="Confirm Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          type={showConfirmPassword ? 'text' : 'password'}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           required
-          placeholder="Confirm Password"
+          placeholder="********"
+          rightIcon={
+            showConfirmPassword ? (
+              <FiEyeOff onClick={() => setShowConfirmPassword(false)} />
+            ) : (
+              <FiEye onClick={() => setShowConfirmPassword(true)} />
+            )
+          }
         />
+
         <button
           type="submit"
           className="w-full my-5 py-3 bg-purple-primary text-white rounded-md md:my-10"
@@ -89,11 +130,12 @@ const navigate = useNavigate();
           Create account
         </button>
       </form>
+
       <div className="text-center text-sm md:text-lg">
         <h4>
-          Don't have an account?{' '}
+          Already have an account?{' '}
           <span className="text-purple-primary">
-            <Link to="/">login</Link>
+            <Link to="/">Login</Link>
           </span>
         </h4>
       </div>

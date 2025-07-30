@@ -63,13 +63,13 @@ const LoginComponent: React.FC = () => {
           required
           placeholder="********"
         />
-        <Link className="text-purple-primary text-sm" to="/forgot-password">
+        <Link className="text-purple-primary text-sm md:text-lg" to="/forgot-password">
           {' '}
           Forgot Password?
         </Link>
         <button
           type="submit"
-          className="w-full my-10 py-2 md:py-3 bg-purple-primary text-white rounded-md"
+          className="w-full my-10 py-3 bg-purple-primary text-white rounded-md"
         >
           Login
         </button>

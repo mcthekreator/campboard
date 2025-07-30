@@ -5,19 +5,25 @@ import ForgotPasswordComponent from '../../components/features/forgot-password.c
 
 const ForgotPasswordLayout: React.FC = () => {
   return (
-    <div className="flex w-full min-h-screen">
-  <div className="w-[50%] hidden md:block">
-    <LeftAuthComponent />
-  </div>
 
-  <div className="flex w-full md:w-[60%] items-center">
-    <div className="w-10/12 mx-auto md:w-8/12">
-      <AuthHeader title='Login into your account' />
-      <ForgotPasswordComponent />
-    </div>
-  </div>
-</div>
+ <div>
+   <div className="flex w-full">
 
+     <div className="w-[50%] hidden md:block md:w-1/2">
+       <LeftAuthComponent />
+     </div>
+
+     <div className="flex w-full md:w-[60%] items-center justify-center px-6 py-20">
+       <div className="w-full md:w-8/12">
+         <AuthHeader
+           title="Forgot your password"
+           description="Please enter the email adderess "
+         />
+         <ForgotPasswordComponent />
+       </div>
+     </div>
+   </div>
+ </div>
   );
 };
 

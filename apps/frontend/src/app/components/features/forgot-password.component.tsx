@@ -16,12 +16,13 @@ const ForgotPasswordComponent: React.FC = () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       await forgotPassword(email);
-      toast.success('Login successful!:');
+      toast.success('check email for reset link');
+      setEmail('');
     } catch (error: any) {
       const errorMessage =
         error?.response?.data?.message ||
         error?.message ||
-        'Login failed. Please try again.';
+        'password reset failed. Please try again.';
       toast.error(errorMessage[0]);
     } finally {
       setLoading(false);
