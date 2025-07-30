@@ -1,8 +1,8 @@
 import {
-  Injectable,
-  UnauthorizedException,
   ConflictException,
+  Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -113,24 +113,23 @@ export class AuthService {
     };
   }
 
-async forgotPassword(email: string) {
-  const user = await this.usersRepo.findOne({ where: { email } });
+  async forgotPassword(email: string) {
+    const user = await this.usersRepo.findOne({ where: { email } });
 
-  if (!user) {
+    if (!user) {
+      return { message: 'If the email exists, a reset link has been sent.' };
+    }
+
+    const payload = { email: user.email };
+    const token = this.jwtService.sign(payload, {
+      secret: this.configService.get('JWT_SECRET'),
+      expiresIn: '15m',
+    });
+    const frontendUrl = this.configService.get('DEPLOYED_FRONTEND_URL');
+    const resetUrl = `${frontendUrl}/reset-password?token=${token}`;
+    await this.mailerService.sendResetLinkEmail(user.email, resetUrl);
     return { message: 'If the email exists, a reset link has been sent.' };
   }
-
-  const payload = { email: user.email };
-  const token = this.jwtService.sign(payload, {
-    secret: this.configService.get('JWT_SECRET'),
-    expiresIn: '15m',
-  });
-  const localUrl = this.configService.get('FRONTEND_URL')
-  const resetUrl = `${localUrl}/reset-password?token=${token}`;
-  await this.mailerService.sendResetLinkEmail(user.email, resetUrl);
-  return { message: 'If the email exists, a reset link has been sent.' };
-}
-
 
   async resetPasswordFromToken(token: string, newPassword: string) {
     try {
@@ -146,8 +145,7 @@ async forgotPassword(email: string) {
         throw new NotFoundException('User not found');
       }
 
-      const hashedPassword = await bcrypt.hash(newPassword, this.SALT_ROUNDS);
-      user.password = hashedPassword;
+      user.password = await bcrypt.hash(newPassword, this.SALT_ROUNDS);
 
       await this.usersRepo.save(user);
 
